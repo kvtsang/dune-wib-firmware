@@ -921,8 +921,6 @@
 #define CRL_APB_I2C0_REF_CTRL_OFFSET                                               0XFF5E0120
 #undef CRL_APB_I2C1_REF_CTRL_OFFSET 
 #define CRL_APB_I2C1_REF_CTRL_OFFSET                                               0XFF5E0124
-#undef CRL_APB_CAN1_REF_CTRL_OFFSET 
-#define CRL_APB_CAN1_REF_CTRL_OFFSET                                               0XFF5E0088
 #undef CRL_APB_CPU_R5_CTRL_OFFSET 
 #define CRL_APB_CPU_R5_CTRL_OFFSET                                                 0XFF5E0090
 #undef CRL_APB_IOU_SWITCH_CTRL_OFFSET 
@@ -951,8 +949,6 @@
 #define CRF_APB_DBG_FPD_CTRL_OFFSET                                                0XFD1A0068
 #undef CRF_APB_DDR_CTRL_OFFSET 
 #define CRF_APB_DDR_CTRL_OFFSET                                                    0XFD1A0080
-#undef CRF_APB_GPU_REF_CTRL_OFFSET 
-#define CRF_APB_GPU_REF_CTRL_OFFSET                                                0XFD1A0084
 #undef CRF_APB_GDMA_REF_CTRL_OFFSET 
 #define CRF_APB_GDMA_REF_CTRL_OFFSET                                               0XFD1A00B8
 #undef CRF_APB_DPDMA_REF_CTRL_OFFSET 
@@ -1318,48 +1314,6 @@
 #define CRL_APB_I2C1_REF_CTRL_SRCSEL_DEFVAL                    0x01000500
 #define CRL_APB_I2C1_REF_CTRL_SRCSEL_SHIFT                     0
 #define CRL_APB_I2C1_REF_CTRL_SRCSEL_MASK                      0x00000007U
-
-/*
-* Clock active signal. Switch to 0 to disable the clock
-*/
-#undef CRL_APB_CAN1_REF_CTRL_CLKACT_DEFVAL 
-#undef CRL_APB_CAN1_REF_CTRL_CLKACT_SHIFT 
-#undef CRL_APB_CAN1_REF_CTRL_CLKACT_MASK 
-#define CRL_APB_CAN1_REF_CTRL_CLKACT_DEFVAL                    0x01001800
-#define CRL_APB_CAN1_REF_CTRL_CLKACT_SHIFT                     24
-#define CRL_APB_CAN1_REF_CTRL_CLKACT_MASK                      0x01000000U
-
-/*
-* 6 bit divider
-*/
-#undef CRL_APB_CAN1_REF_CTRL_DIVISOR1_DEFVAL 
-#undef CRL_APB_CAN1_REF_CTRL_DIVISOR1_SHIFT 
-#undef CRL_APB_CAN1_REF_CTRL_DIVISOR1_MASK 
-#define CRL_APB_CAN1_REF_CTRL_DIVISOR1_DEFVAL                  0x01001800
-#define CRL_APB_CAN1_REF_CTRL_DIVISOR1_SHIFT                   16
-#define CRL_APB_CAN1_REF_CTRL_DIVISOR1_MASK                    0x003F0000U
-
-/*
-* 6 bit divider
-*/
-#undef CRL_APB_CAN1_REF_CTRL_DIVISOR0_DEFVAL 
-#undef CRL_APB_CAN1_REF_CTRL_DIVISOR0_SHIFT 
-#undef CRL_APB_CAN1_REF_CTRL_DIVISOR0_MASK 
-#define CRL_APB_CAN1_REF_CTRL_DIVISOR0_DEFVAL                  0x01001800
-#define CRL_APB_CAN1_REF_CTRL_DIVISOR0_SHIFT                   8
-#define CRL_APB_CAN1_REF_CTRL_DIVISOR0_MASK                    0x00003F00U
-
-/*
-* 000 = IOPLL; 010 = RPLL; 011 = DPLL; (This signal may only be toggled af
-    * ter 4 cycles of the old clock and 4 cycles of the new clock. This is not
-    *  usually an issue, but designers must be aware.)
-*/
-#undef CRL_APB_CAN1_REF_CTRL_SRCSEL_DEFVAL 
-#undef CRL_APB_CAN1_REF_CTRL_SRCSEL_SHIFT 
-#undef CRL_APB_CAN1_REF_CTRL_SRCSEL_MASK 
-#define CRL_APB_CAN1_REF_CTRL_SRCSEL_DEFVAL                    0x01001800
-#define CRL_APB_CAN1_REF_CTRL_SRCSEL_SHIFT                     0
-#define CRL_APB_CAN1_REF_CTRL_SRCSEL_MASK                      0x00000007U
 
 /*
 * Turing this off will shut down the OCM, some parts of the APM, and preve
@@ -1812,61 +1766,6 @@
 #define CRF_APB_DDR_CTRL_SRCSEL_DEFVAL                         0x01000500
 #define CRF_APB_DDR_CTRL_SRCSEL_SHIFT                          0
 #define CRF_APB_DDR_CTRL_SRCSEL_MASK                           0x00000007U
-
-/*
-* 6 bit divider
-*/
-#undef CRF_APB_GPU_REF_CTRL_DIVISOR0_DEFVAL 
-#undef CRF_APB_GPU_REF_CTRL_DIVISOR0_SHIFT 
-#undef CRF_APB_GPU_REF_CTRL_DIVISOR0_MASK 
-#define CRF_APB_GPU_REF_CTRL_DIVISOR0_DEFVAL                   0x00001500
-#define CRF_APB_GPU_REF_CTRL_DIVISOR0_SHIFT                    8
-#define CRF_APB_GPU_REF_CTRL_DIVISOR0_MASK                     0x00003F00U
-
-/*
-* 000 = IOPLL_TO_FPD; 010 = VPLL; 011 = DPLL; (This signal may only be tog
-    * gled after 4 cycles of the old clock and 4 cycles of the new clock. This
-    *  is not usually an issue, but designers must be aware.)
-*/
-#undef CRF_APB_GPU_REF_CTRL_SRCSEL_DEFVAL 
-#undef CRF_APB_GPU_REF_CTRL_SRCSEL_SHIFT 
-#undef CRF_APB_GPU_REF_CTRL_SRCSEL_MASK 
-#define CRF_APB_GPU_REF_CTRL_SRCSEL_DEFVAL                     0x00001500
-#define CRF_APB_GPU_REF_CTRL_SRCSEL_SHIFT                      0
-#define CRF_APB_GPU_REF_CTRL_SRCSEL_MASK                       0x00000007U
-
-/*
-* Clock active signal. Switch to 0 to disable the clock, which will stop c
-    * lock for GPU (and both Pixel Processors).
-*/
-#undef CRF_APB_GPU_REF_CTRL_CLKACT_DEFVAL 
-#undef CRF_APB_GPU_REF_CTRL_CLKACT_SHIFT 
-#undef CRF_APB_GPU_REF_CTRL_CLKACT_MASK 
-#define CRF_APB_GPU_REF_CTRL_CLKACT_DEFVAL                     0x00001500
-#define CRF_APB_GPU_REF_CTRL_CLKACT_SHIFT                      24
-#define CRF_APB_GPU_REF_CTRL_CLKACT_MASK                       0x01000000U
-
-/*
-* Clock active signal for Pixel Processor. Switch to 0 to disable the cloc
-    * k only to this Pixel Processor
-*/
-#undef CRF_APB_GPU_REF_CTRL_PP0_CLKACT_DEFVAL 
-#undef CRF_APB_GPU_REF_CTRL_PP0_CLKACT_SHIFT 
-#undef CRF_APB_GPU_REF_CTRL_PP0_CLKACT_MASK 
-#define CRF_APB_GPU_REF_CTRL_PP0_CLKACT_DEFVAL                 0x00001500
-#define CRF_APB_GPU_REF_CTRL_PP0_CLKACT_SHIFT                  25
-#define CRF_APB_GPU_REF_CTRL_PP0_CLKACT_MASK                   0x02000000U
-
-/*
-* Clock active signal for Pixel Processor. Switch to 0 to disable the cloc
-    * k only to this Pixel Processor
-*/
-#undef CRF_APB_GPU_REF_CTRL_PP1_CLKACT_DEFVAL 
-#undef CRF_APB_GPU_REF_CTRL_PP1_CLKACT_SHIFT 
-#undef CRF_APB_GPU_REF_CTRL_PP1_CLKACT_MASK 
-#define CRF_APB_GPU_REF_CTRL_PP1_CLKACT_DEFVAL                 0x00001500
-#define CRF_APB_GPU_REF_CTRL_PP1_CLKACT_SHIFT                  26
-#define CRF_APB_GPU_REF_CTRL_PP1_CLKACT_MASK                   0x04000000U
 
 /*
 * 6 bit divider
@@ -23278,10 +23177,6 @@
 #define IOU_SLCR_MIO_PIN_18_OFFSET                                                 0XFF180048
 #undef IOU_SLCR_MIO_PIN_19_OFFSET 
 #define IOU_SLCR_MIO_PIN_19_OFFSET                                                 0XFF18004C
-#undef IOU_SLCR_MIO_PIN_24_OFFSET 
-#define IOU_SLCR_MIO_PIN_24_OFFSET                                                 0XFF180060
-#undef IOU_SLCR_MIO_PIN_25_OFFSET 
-#define IOU_SLCR_MIO_PIN_25_OFFSET                                                 0XFF180064
 #undef IOU_SLCR_MIO_PIN_45_OFFSET 
 #define IOU_SLCR_MIO_PIN_45_OFFSET                                                 0XFF1800B4
 #undef IOU_SLCR_MIO_PIN_46_OFFSET 
@@ -24255,106 +24150,6 @@
 #define IOU_SLCR_MIO_PIN_19_L3_SEL_MASK                        0x000000E0U
 
 /*
-* Level 0 Mux Select 0= Level 1 Mux Output 1= Not Used
-*/
-#undef IOU_SLCR_MIO_PIN_24_L0_SEL_DEFVAL 
-#undef IOU_SLCR_MIO_PIN_24_L0_SEL_SHIFT 
-#undef IOU_SLCR_MIO_PIN_24_L0_SEL_MASK 
-#define IOU_SLCR_MIO_PIN_24_L0_SEL_DEFVAL                      0x00000000
-#define IOU_SLCR_MIO_PIN_24_L0_SEL_SHIFT                       1
-#define IOU_SLCR_MIO_PIN_24_L0_SEL_MASK                        0x00000002U
-
-/*
-* Level 1 Mux Select 0= Level 2 Mux Output 1= nand, Input, nfc_dq_in[7]- (
-    * NAND Data Bus) 1= nand, Output, nfc_dq_out[7]- (NAND Data Bus)
-*/
-#undef IOU_SLCR_MIO_PIN_24_L1_SEL_DEFVAL 
-#undef IOU_SLCR_MIO_PIN_24_L1_SEL_SHIFT 
-#undef IOU_SLCR_MIO_PIN_24_L1_SEL_MASK 
-#define IOU_SLCR_MIO_PIN_24_L1_SEL_DEFVAL                      0x00000000
-#define IOU_SLCR_MIO_PIN_24_L1_SEL_SHIFT                       2
-#define IOU_SLCR_MIO_PIN_24_L1_SEL_MASK                        0x00000004U
-
-/*
-* Level 2 Mux Select 0= Level 3 Mux Output 1= sd0, Input, sdio0_cd_n- (SD
-    * card detect from connector) 2= test_scan, Input, test_scan_in[24]- (Test
-    *  Scan Port) = test_scan, Output, test_scan_out[24]- (Test Scan Port) 3=
-    * csu, Input, csu_ext_tamper- (CSU Ext Tamper)
-*/
-#undef IOU_SLCR_MIO_PIN_24_L2_SEL_DEFVAL 
-#undef IOU_SLCR_MIO_PIN_24_L2_SEL_SHIFT 
-#undef IOU_SLCR_MIO_PIN_24_L2_SEL_MASK 
-#define IOU_SLCR_MIO_PIN_24_L2_SEL_DEFVAL                      0x00000000
-#define IOU_SLCR_MIO_PIN_24_L2_SEL_SHIFT                       3
-#define IOU_SLCR_MIO_PIN_24_L2_SEL_MASK                        0x00000018U
-
-/*
-* Level 3 Mux Select 0= gpio0, Input, gpio_0_pin_in[24]- (GPIO bank 0) 0=
-    * gpio0, Output, gpio_0_pin_out[24]- (GPIO bank 0) 1= can1, Output, can1_p
-    * hy_tx- (Can TX signal) 2= i2c1, Input, i2c1_scl_input- (SCL signal) 2= i
-    * 2c1, Output, i2c1_scl_out- (SCL signal) 3= swdt1, Input, swdt1_clk_in- (
-    * Watch Dog Timer Input clock) 4= Not Used 5= ttc3, Input, ttc3_clk_in- (T
-    * TC Clock) 6= ua1, Output, ua1_txd- (UART transmitter serial output) 7= N
-    * ot Used
-*/
-#undef IOU_SLCR_MIO_PIN_24_L3_SEL_DEFVAL 
-#undef IOU_SLCR_MIO_PIN_24_L3_SEL_SHIFT 
-#undef IOU_SLCR_MIO_PIN_24_L3_SEL_MASK 
-#define IOU_SLCR_MIO_PIN_24_L3_SEL_DEFVAL                      0x00000000
-#define IOU_SLCR_MIO_PIN_24_L3_SEL_SHIFT                       5
-#define IOU_SLCR_MIO_PIN_24_L3_SEL_MASK                        0x000000E0U
-
-/*
-* Level 0 Mux Select 0= Level 1 Mux Output 1= Not Used
-*/
-#undef IOU_SLCR_MIO_PIN_25_L0_SEL_DEFVAL 
-#undef IOU_SLCR_MIO_PIN_25_L0_SEL_SHIFT 
-#undef IOU_SLCR_MIO_PIN_25_L0_SEL_MASK 
-#define IOU_SLCR_MIO_PIN_25_L0_SEL_DEFVAL                      0x00000000
-#define IOU_SLCR_MIO_PIN_25_L0_SEL_SHIFT                       1
-#define IOU_SLCR_MIO_PIN_25_L0_SEL_MASK                        0x00000002U
-
-/*
-* Level 1 Mux Select 0= Level 2 Mux Output 1= nand, Output, nfc_re_n- (NAN
-    * D Read Enable)
-*/
-#undef IOU_SLCR_MIO_PIN_25_L1_SEL_DEFVAL 
-#undef IOU_SLCR_MIO_PIN_25_L1_SEL_SHIFT 
-#undef IOU_SLCR_MIO_PIN_25_L1_SEL_MASK 
-#define IOU_SLCR_MIO_PIN_25_L1_SEL_DEFVAL                      0x00000000
-#define IOU_SLCR_MIO_PIN_25_L1_SEL_SHIFT                       2
-#define IOU_SLCR_MIO_PIN_25_L1_SEL_MASK                        0x00000004U
-
-/*
-* Level 2 Mux Select 0= Level 3 Mux Output 1= sd0, Input, sdio0_wp- (SD ca
-    * rd write protect from connector) 2= test_scan, Input, test_scan_in[25]-
-    * (Test Scan Port) = test_scan, Output, test_scan_out[25]- (Test Scan Port
-    * ) 3= csu, Input, csu_ext_tamper- (CSU Ext Tamper)
-*/
-#undef IOU_SLCR_MIO_PIN_25_L2_SEL_DEFVAL 
-#undef IOU_SLCR_MIO_PIN_25_L2_SEL_SHIFT 
-#undef IOU_SLCR_MIO_PIN_25_L2_SEL_MASK 
-#define IOU_SLCR_MIO_PIN_25_L2_SEL_DEFVAL                      0x00000000
-#define IOU_SLCR_MIO_PIN_25_L2_SEL_SHIFT                       3
-#define IOU_SLCR_MIO_PIN_25_L2_SEL_MASK                        0x00000018U
-
-/*
-* Level 3 Mux Select 0= gpio0, Input, gpio_0_pin_in[25]- (GPIO bank 0) 0=
-    * gpio0, Output, gpio_0_pin_out[25]- (GPIO bank 0) 1= can1, Input, can1_ph
-    * y_rx- (Can RX signal) 2= i2c1, Input, i2c1_sda_input- (SDA signal) 2= i2
-    * c1, Output, i2c1_sda_out- (SDA signal) 3= swdt1, Output, swdt1_rst_out-
-    * (Watch Dog Timer Output clock) 4= Not Used 5= ttc3, Output, ttc3_wave_ou
-    * t- (TTC Waveform Clock) 6= ua1, Input, ua1_rxd- (UART receiver serial in
-    * put) 7= Not Used
-*/
-#undef IOU_SLCR_MIO_PIN_25_L3_SEL_DEFVAL 
-#undef IOU_SLCR_MIO_PIN_25_L3_SEL_SHIFT 
-#undef IOU_SLCR_MIO_PIN_25_L3_SEL_MASK 
-#define IOU_SLCR_MIO_PIN_25_L3_SEL_DEFVAL                      0x00000000
-#define IOU_SLCR_MIO_PIN_25_L3_SEL_SHIFT                       5
-#define IOU_SLCR_MIO_PIN_25_L3_SEL_MASK                        0x000000E0U
-
-/*
 * Level 0 Mux Select 0= Level 1 Mux Output 1= gem1, Input, gem1_rgmii_rxd[
     * 0]- (RX RGMII data)
 */
@@ -24764,16 +24559,6 @@
 #define IOU_SLCR_MIO_MST_TRI0_PIN_05_TRI_MASK                  0x00000020U
 
 /*
-* Master Tri-state Enable for pin 6, active high
-*/
-#undef IOU_SLCR_MIO_MST_TRI0_PIN_06_TRI_DEFVAL 
-#undef IOU_SLCR_MIO_MST_TRI0_PIN_06_TRI_SHIFT 
-#undef IOU_SLCR_MIO_MST_TRI0_PIN_06_TRI_MASK 
-#define IOU_SLCR_MIO_MST_TRI0_PIN_06_TRI_DEFVAL                0xFFFFFFFF
-#define IOU_SLCR_MIO_MST_TRI0_PIN_06_TRI_SHIFT                 6
-#define IOU_SLCR_MIO_MST_TRI0_PIN_06_TRI_MASK                  0x00000040U
-
-/*
 * Master Tri-state Enable for pin 7, active high
 */
 #undef IOU_SLCR_MIO_MST_TRI0_PIN_07_TRI_DEFVAL 
@@ -24834,16 +24619,6 @@
 #define IOU_SLCR_MIO_MST_TRI0_PIN_12_TRI_MASK                  0x00001000U
 
 /*
-* Master Tri-state Enable for pin 13, active high
-*/
-#undef IOU_SLCR_MIO_MST_TRI0_PIN_13_TRI_DEFVAL 
-#undef IOU_SLCR_MIO_MST_TRI0_PIN_13_TRI_SHIFT 
-#undef IOU_SLCR_MIO_MST_TRI0_PIN_13_TRI_MASK 
-#define IOU_SLCR_MIO_MST_TRI0_PIN_13_TRI_DEFVAL                0xFFFFFFFF
-#define IOU_SLCR_MIO_MST_TRI0_PIN_13_TRI_SHIFT                 13
-#define IOU_SLCR_MIO_MST_TRI0_PIN_13_TRI_MASK                  0x00002000U
-
-/*
 * Master Tri-state Enable for pin 14, active high
 */
 #undef IOU_SLCR_MIO_MST_TRI0_PIN_14_TRI_DEFVAL 
@@ -24902,256 +24677,6 @@
 #define IOU_SLCR_MIO_MST_TRI0_PIN_19_TRI_DEFVAL                0xFFFFFFFF
 #define IOU_SLCR_MIO_MST_TRI0_PIN_19_TRI_SHIFT                 19
 #define IOU_SLCR_MIO_MST_TRI0_PIN_19_TRI_MASK                  0x00080000U
-
-/*
-* Master Tri-state Enable for pin 20, active high
-*/
-#undef IOU_SLCR_MIO_MST_TRI0_PIN_20_TRI_DEFVAL 
-#undef IOU_SLCR_MIO_MST_TRI0_PIN_20_TRI_SHIFT 
-#undef IOU_SLCR_MIO_MST_TRI0_PIN_20_TRI_MASK 
-#define IOU_SLCR_MIO_MST_TRI0_PIN_20_TRI_DEFVAL                0xFFFFFFFF
-#define IOU_SLCR_MIO_MST_TRI0_PIN_20_TRI_SHIFT                 20
-#define IOU_SLCR_MIO_MST_TRI0_PIN_20_TRI_MASK                  0x00100000U
-
-/*
-* Master Tri-state Enable for pin 21, active high
-*/
-#undef IOU_SLCR_MIO_MST_TRI0_PIN_21_TRI_DEFVAL 
-#undef IOU_SLCR_MIO_MST_TRI0_PIN_21_TRI_SHIFT 
-#undef IOU_SLCR_MIO_MST_TRI0_PIN_21_TRI_MASK 
-#define IOU_SLCR_MIO_MST_TRI0_PIN_21_TRI_DEFVAL                0xFFFFFFFF
-#define IOU_SLCR_MIO_MST_TRI0_PIN_21_TRI_SHIFT                 21
-#define IOU_SLCR_MIO_MST_TRI0_PIN_21_TRI_MASK                  0x00200000U
-
-/*
-* Master Tri-state Enable for pin 22, active high
-*/
-#undef IOU_SLCR_MIO_MST_TRI0_PIN_22_TRI_DEFVAL 
-#undef IOU_SLCR_MIO_MST_TRI0_PIN_22_TRI_SHIFT 
-#undef IOU_SLCR_MIO_MST_TRI0_PIN_22_TRI_MASK 
-#define IOU_SLCR_MIO_MST_TRI0_PIN_22_TRI_DEFVAL                0xFFFFFFFF
-#define IOU_SLCR_MIO_MST_TRI0_PIN_22_TRI_SHIFT                 22
-#define IOU_SLCR_MIO_MST_TRI0_PIN_22_TRI_MASK                  0x00400000U
-
-/*
-* Master Tri-state Enable for pin 23, active high
-*/
-#undef IOU_SLCR_MIO_MST_TRI0_PIN_23_TRI_DEFVAL 
-#undef IOU_SLCR_MIO_MST_TRI0_PIN_23_TRI_SHIFT 
-#undef IOU_SLCR_MIO_MST_TRI0_PIN_23_TRI_MASK 
-#define IOU_SLCR_MIO_MST_TRI0_PIN_23_TRI_DEFVAL                0xFFFFFFFF
-#define IOU_SLCR_MIO_MST_TRI0_PIN_23_TRI_SHIFT                 23
-#define IOU_SLCR_MIO_MST_TRI0_PIN_23_TRI_MASK                  0x00800000U
-
-/*
-* Master Tri-state Enable for pin 24, active high
-*/
-#undef IOU_SLCR_MIO_MST_TRI0_PIN_24_TRI_DEFVAL 
-#undef IOU_SLCR_MIO_MST_TRI0_PIN_24_TRI_SHIFT 
-#undef IOU_SLCR_MIO_MST_TRI0_PIN_24_TRI_MASK 
-#define IOU_SLCR_MIO_MST_TRI0_PIN_24_TRI_DEFVAL                0xFFFFFFFF
-#define IOU_SLCR_MIO_MST_TRI0_PIN_24_TRI_SHIFT                 24
-#define IOU_SLCR_MIO_MST_TRI0_PIN_24_TRI_MASK                  0x01000000U
-
-/*
-* Master Tri-state Enable for pin 25, active high
-*/
-#undef IOU_SLCR_MIO_MST_TRI0_PIN_25_TRI_DEFVAL 
-#undef IOU_SLCR_MIO_MST_TRI0_PIN_25_TRI_SHIFT 
-#undef IOU_SLCR_MIO_MST_TRI0_PIN_25_TRI_MASK 
-#define IOU_SLCR_MIO_MST_TRI0_PIN_25_TRI_DEFVAL                0xFFFFFFFF
-#define IOU_SLCR_MIO_MST_TRI0_PIN_25_TRI_SHIFT                 25
-#define IOU_SLCR_MIO_MST_TRI0_PIN_25_TRI_MASK                  0x02000000U
-
-/*
-* Master Tri-state Enable for pin 26, active high
-*/
-#undef IOU_SLCR_MIO_MST_TRI0_PIN_26_TRI_DEFVAL 
-#undef IOU_SLCR_MIO_MST_TRI0_PIN_26_TRI_SHIFT 
-#undef IOU_SLCR_MIO_MST_TRI0_PIN_26_TRI_MASK 
-#define IOU_SLCR_MIO_MST_TRI0_PIN_26_TRI_DEFVAL                0xFFFFFFFF
-#define IOU_SLCR_MIO_MST_TRI0_PIN_26_TRI_SHIFT                 26
-#define IOU_SLCR_MIO_MST_TRI0_PIN_26_TRI_MASK                  0x04000000U
-
-/*
-* Master Tri-state Enable for pin 27, active high
-*/
-#undef IOU_SLCR_MIO_MST_TRI0_PIN_27_TRI_DEFVAL 
-#undef IOU_SLCR_MIO_MST_TRI0_PIN_27_TRI_SHIFT 
-#undef IOU_SLCR_MIO_MST_TRI0_PIN_27_TRI_MASK 
-#define IOU_SLCR_MIO_MST_TRI0_PIN_27_TRI_DEFVAL                0xFFFFFFFF
-#define IOU_SLCR_MIO_MST_TRI0_PIN_27_TRI_SHIFT                 27
-#define IOU_SLCR_MIO_MST_TRI0_PIN_27_TRI_MASK                  0x08000000U
-
-/*
-* Master Tri-state Enable for pin 28, active high
-*/
-#undef IOU_SLCR_MIO_MST_TRI0_PIN_28_TRI_DEFVAL 
-#undef IOU_SLCR_MIO_MST_TRI0_PIN_28_TRI_SHIFT 
-#undef IOU_SLCR_MIO_MST_TRI0_PIN_28_TRI_MASK 
-#define IOU_SLCR_MIO_MST_TRI0_PIN_28_TRI_DEFVAL                0xFFFFFFFF
-#define IOU_SLCR_MIO_MST_TRI0_PIN_28_TRI_SHIFT                 28
-#define IOU_SLCR_MIO_MST_TRI0_PIN_28_TRI_MASK                  0x10000000U
-
-/*
-* Master Tri-state Enable for pin 29, active high
-*/
-#undef IOU_SLCR_MIO_MST_TRI0_PIN_29_TRI_DEFVAL 
-#undef IOU_SLCR_MIO_MST_TRI0_PIN_29_TRI_SHIFT 
-#undef IOU_SLCR_MIO_MST_TRI0_PIN_29_TRI_MASK 
-#define IOU_SLCR_MIO_MST_TRI0_PIN_29_TRI_DEFVAL                0xFFFFFFFF
-#define IOU_SLCR_MIO_MST_TRI0_PIN_29_TRI_SHIFT                 29
-#define IOU_SLCR_MIO_MST_TRI0_PIN_29_TRI_MASK                  0x20000000U
-
-/*
-* Master Tri-state Enable for pin 30, active high
-*/
-#undef IOU_SLCR_MIO_MST_TRI0_PIN_30_TRI_DEFVAL 
-#undef IOU_SLCR_MIO_MST_TRI0_PIN_30_TRI_SHIFT 
-#undef IOU_SLCR_MIO_MST_TRI0_PIN_30_TRI_MASK 
-#define IOU_SLCR_MIO_MST_TRI0_PIN_30_TRI_DEFVAL                0xFFFFFFFF
-#define IOU_SLCR_MIO_MST_TRI0_PIN_30_TRI_SHIFT                 30
-#define IOU_SLCR_MIO_MST_TRI0_PIN_30_TRI_MASK                  0x40000000U
-
-/*
-* Master Tri-state Enable for pin 31, active high
-*/
-#undef IOU_SLCR_MIO_MST_TRI0_PIN_31_TRI_DEFVAL 
-#undef IOU_SLCR_MIO_MST_TRI0_PIN_31_TRI_SHIFT 
-#undef IOU_SLCR_MIO_MST_TRI0_PIN_31_TRI_MASK 
-#define IOU_SLCR_MIO_MST_TRI0_PIN_31_TRI_DEFVAL                0xFFFFFFFF
-#define IOU_SLCR_MIO_MST_TRI0_PIN_31_TRI_SHIFT                 31
-#define IOU_SLCR_MIO_MST_TRI0_PIN_31_TRI_MASK                  0x80000000U
-
-/*
-* Master Tri-state Enable for pin 32, active high
-*/
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_32_TRI_DEFVAL 
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_32_TRI_SHIFT 
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_32_TRI_MASK 
-#define IOU_SLCR_MIO_MST_TRI1_PIN_32_TRI_DEFVAL                0xFFFFFFFF
-#define IOU_SLCR_MIO_MST_TRI1_PIN_32_TRI_SHIFT                 0
-#define IOU_SLCR_MIO_MST_TRI1_PIN_32_TRI_MASK                  0x00000001U
-
-/*
-* Master Tri-state Enable for pin 33, active high
-*/
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_33_TRI_DEFVAL 
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_33_TRI_SHIFT 
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_33_TRI_MASK 
-#define IOU_SLCR_MIO_MST_TRI1_PIN_33_TRI_DEFVAL                0xFFFFFFFF
-#define IOU_SLCR_MIO_MST_TRI1_PIN_33_TRI_SHIFT                 1
-#define IOU_SLCR_MIO_MST_TRI1_PIN_33_TRI_MASK                  0x00000002U
-
-/*
-* Master Tri-state Enable for pin 34, active high
-*/
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_34_TRI_DEFVAL 
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_34_TRI_SHIFT 
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_34_TRI_MASK 
-#define IOU_SLCR_MIO_MST_TRI1_PIN_34_TRI_DEFVAL                0xFFFFFFFF
-#define IOU_SLCR_MIO_MST_TRI1_PIN_34_TRI_SHIFT                 2
-#define IOU_SLCR_MIO_MST_TRI1_PIN_34_TRI_MASK                  0x00000004U
-
-/*
-* Master Tri-state Enable for pin 35, active high
-*/
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_35_TRI_DEFVAL 
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_35_TRI_SHIFT 
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_35_TRI_MASK 
-#define IOU_SLCR_MIO_MST_TRI1_PIN_35_TRI_DEFVAL                0xFFFFFFFF
-#define IOU_SLCR_MIO_MST_TRI1_PIN_35_TRI_SHIFT                 3
-#define IOU_SLCR_MIO_MST_TRI1_PIN_35_TRI_MASK                  0x00000008U
-
-/*
-* Master Tri-state Enable for pin 36, active high
-*/
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_36_TRI_DEFVAL 
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_36_TRI_SHIFT 
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_36_TRI_MASK 
-#define IOU_SLCR_MIO_MST_TRI1_PIN_36_TRI_DEFVAL                0xFFFFFFFF
-#define IOU_SLCR_MIO_MST_TRI1_PIN_36_TRI_SHIFT                 4
-#define IOU_SLCR_MIO_MST_TRI1_PIN_36_TRI_MASK                  0x00000010U
-
-/*
-* Master Tri-state Enable for pin 37, active high
-*/
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_37_TRI_DEFVAL 
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_37_TRI_SHIFT 
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_37_TRI_MASK 
-#define IOU_SLCR_MIO_MST_TRI1_PIN_37_TRI_DEFVAL                0xFFFFFFFF
-#define IOU_SLCR_MIO_MST_TRI1_PIN_37_TRI_SHIFT                 5
-#define IOU_SLCR_MIO_MST_TRI1_PIN_37_TRI_MASK                  0x00000020U
-
-/*
-* Master Tri-state Enable for pin 38, active high
-*/
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_38_TRI_DEFVAL 
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_38_TRI_SHIFT 
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_38_TRI_MASK 
-#define IOU_SLCR_MIO_MST_TRI1_PIN_38_TRI_DEFVAL                0xFFFFFFFF
-#define IOU_SLCR_MIO_MST_TRI1_PIN_38_TRI_SHIFT                 6
-#define IOU_SLCR_MIO_MST_TRI1_PIN_38_TRI_MASK                  0x00000040U
-
-/*
-* Master Tri-state Enable for pin 39, active high
-*/
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_39_TRI_DEFVAL 
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_39_TRI_SHIFT 
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_39_TRI_MASK 
-#define IOU_SLCR_MIO_MST_TRI1_PIN_39_TRI_DEFVAL                0xFFFFFFFF
-#define IOU_SLCR_MIO_MST_TRI1_PIN_39_TRI_SHIFT                 7
-#define IOU_SLCR_MIO_MST_TRI1_PIN_39_TRI_MASK                  0x00000080U
-
-/*
-* Master Tri-state Enable for pin 40, active high
-*/
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_40_TRI_DEFVAL 
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_40_TRI_SHIFT 
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_40_TRI_MASK 
-#define IOU_SLCR_MIO_MST_TRI1_PIN_40_TRI_DEFVAL                0xFFFFFFFF
-#define IOU_SLCR_MIO_MST_TRI1_PIN_40_TRI_SHIFT                 8
-#define IOU_SLCR_MIO_MST_TRI1_PIN_40_TRI_MASK                  0x00000100U
-
-/*
-* Master Tri-state Enable for pin 41, active high
-*/
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_41_TRI_DEFVAL 
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_41_TRI_SHIFT 
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_41_TRI_MASK 
-#define IOU_SLCR_MIO_MST_TRI1_PIN_41_TRI_DEFVAL                0xFFFFFFFF
-#define IOU_SLCR_MIO_MST_TRI1_PIN_41_TRI_SHIFT                 9
-#define IOU_SLCR_MIO_MST_TRI1_PIN_41_TRI_MASK                  0x00000200U
-
-/*
-* Master Tri-state Enable for pin 42, active high
-*/
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_42_TRI_DEFVAL 
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_42_TRI_SHIFT 
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_42_TRI_MASK 
-#define IOU_SLCR_MIO_MST_TRI1_PIN_42_TRI_DEFVAL                0xFFFFFFFF
-#define IOU_SLCR_MIO_MST_TRI1_PIN_42_TRI_SHIFT                 10
-#define IOU_SLCR_MIO_MST_TRI1_PIN_42_TRI_MASK                  0x00000400U
-
-/*
-* Master Tri-state Enable for pin 43, active high
-*/
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_43_TRI_DEFVAL 
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_43_TRI_SHIFT 
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_43_TRI_MASK 
-#define IOU_SLCR_MIO_MST_TRI1_PIN_43_TRI_DEFVAL                0xFFFFFFFF
-#define IOU_SLCR_MIO_MST_TRI1_PIN_43_TRI_SHIFT                 11
-#define IOU_SLCR_MIO_MST_TRI1_PIN_43_TRI_MASK                  0x00000800U
-
-/*
-* Master Tri-state Enable for pin 44, active high
-*/
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_44_TRI_DEFVAL 
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_44_TRI_SHIFT 
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_44_TRI_MASK 
-#define IOU_SLCR_MIO_MST_TRI1_PIN_44_TRI_DEFVAL                0xFFFFFFFF
-#define IOU_SLCR_MIO_MST_TRI1_PIN_44_TRI_SHIFT                 12
-#define IOU_SLCR_MIO_MST_TRI1_PIN_44_TRI_MASK                  0x00001000U
 
 /*
 * Master Tri-state Enable for pin 45, active high
@@ -25222,126 +24747,6 @@
 #define IOU_SLCR_MIO_MST_TRI1_PIN_51_TRI_DEFVAL                0xFFFFFFFF
 #define IOU_SLCR_MIO_MST_TRI1_PIN_51_TRI_SHIFT                 19
 #define IOU_SLCR_MIO_MST_TRI1_PIN_51_TRI_MASK                  0x00080000U
-
-/*
-* Master Tri-state Enable for pin 52, active high
-*/
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_52_TRI_DEFVAL 
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_52_TRI_SHIFT 
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_52_TRI_MASK 
-#define IOU_SLCR_MIO_MST_TRI1_PIN_52_TRI_DEFVAL                0xFFFFFFFF
-#define IOU_SLCR_MIO_MST_TRI1_PIN_52_TRI_SHIFT                 20
-#define IOU_SLCR_MIO_MST_TRI1_PIN_52_TRI_MASK                  0x00100000U
-
-/*
-* Master Tri-state Enable for pin 53, active high
-*/
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_53_TRI_DEFVAL 
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_53_TRI_SHIFT 
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_53_TRI_MASK 
-#define IOU_SLCR_MIO_MST_TRI1_PIN_53_TRI_DEFVAL                0xFFFFFFFF
-#define IOU_SLCR_MIO_MST_TRI1_PIN_53_TRI_SHIFT                 21
-#define IOU_SLCR_MIO_MST_TRI1_PIN_53_TRI_MASK                  0x00200000U
-
-/*
-* Master Tri-state Enable for pin 54, active high
-*/
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_54_TRI_DEFVAL 
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_54_TRI_SHIFT 
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_54_TRI_MASK 
-#define IOU_SLCR_MIO_MST_TRI1_PIN_54_TRI_DEFVAL                0xFFFFFFFF
-#define IOU_SLCR_MIO_MST_TRI1_PIN_54_TRI_SHIFT                 22
-#define IOU_SLCR_MIO_MST_TRI1_PIN_54_TRI_MASK                  0x00400000U
-
-/*
-* Master Tri-state Enable for pin 55, active high
-*/
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_55_TRI_DEFVAL 
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_55_TRI_SHIFT 
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_55_TRI_MASK 
-#define IOU_SLCR_MIO_MST_TRI1_PIN_55_TRI_DEFVAL                0xFFFFFFFF
-#define IOU_SLCR_MIO_MST_TRI1_PIN_55_TRI_SHIFT                 23
-#define IOU_SLCR_MIO_MST_TRI1_PIN_55_TRI_MASK                  0x00800000U
-
-/*
-* Master Tri-state Enable for pin 56, active high
-*/
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_56_TRI_DEFVAL 
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_56_TRI_SHIFT 
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_56_TRI_MASK 
-#define IOU_SLCR_MIO_MST_TRI1_PIN_56_TRI_DEFVAL                0xFFFFFFFF
-#define IOU_SLCR_MIO_MST_TRI1_PIN_56_TRI_SHIFT                 24
-#define IOU_SLCR_MIO_MST_TRI1_PIN_56_TRI_MASK                  0x01000000U
-
-/*
-* Master Tri-state Enable for pin 57, active high
-*/
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_57_TRI_DEFVAL 
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_57_TRI_SHIFT 
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_57_TRI_MASK 
-#define IOU_SLCR_MIO_MST_TRI1_PIN_57_TRI_DEFVAL                0xFFFFFFFF
-#define IOU_SLCR_MIO_MST_TRI1_PIN_57_TRI_SHIFT                 25
-#define IOU_SLCR_MIO_MST_TRI1_PIN_57_TRI_MASK                  0x02000000U
-
-/*
-* Master Tri-state Enable for pin 58, active high
-*/
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_58_TRI_DEFVAL 
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_58_TRI_SHIFT 
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_58_TRI_MASK 
-#define IOU_SLCR_MIO_MST_TRI1_PIN_58_TRI_DEFVAL                0xFFFFFFFF
-#define IOU_SLCR_MIO_MST_TRI1_PIN_58_TRI_SHIFT                 26
-#define IOU_SLCR_MIO_MST_TRI1_PIN_58_TRI_MASK                  0x04000000U
-
-/*
-* Master Tri-state Enable for pin 59, active high
-*/
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_59_TRI_DEFVAL 
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_59_TRI_SHIFT 
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_59_TRI_MASK 
-#define IOU_SLCR_MIO_MST_TRI1_PIN_59_TRI_DEFVAL                0xFFFFFFFF
-#define IOU_SLCR_MIO_MST_TRI1_PIN_59_TRI_SHIFT                 27
-#define IOU_SLCR_MIO_MST_TRI1_PIN_59_TRI_MASK                  0x08000000U
-
-/*
-* Master Tri-state Enable for pin 60, active high
-*/
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_60_TRI_DEFVAL 
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_60_TRI_SHIFT 
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_60_TRI_MASK 
-#define IOU_SLCR_MIO_MST_TRI1_PIN_60_TRI_DEFVAL                0xFFFFFFFF
-#define IOU_SLCR_MIO_MST_TRI1_PIN_60_TRI_SHIFT                 28
-#define IOU_SLCR_MIO_MST_TRI1_PIN_60_TRI_MASK                  0x10000000U
-
-/*
-* Master Tri-state Enable for pin 61, active high
-*/
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_61_TRI_DEFVAL 
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_61_TRI_SHIFT 
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_61_TRI_MASK 
-#define IOU_SLCR_MIO_MST_TRI1_PIN_61_TRI_DEFVAL                0xFFFFFFFF
-#define IOU_SLCR_MIO_MST_TRI1_PIN_61_TRI_SHIFT                 29
-#define IOU_SLCR_MIO_MST_TRI1_PIN_61_TRI_MASK                  0x20000000U
-
-/*
-* Master Tri-state Enable for pin 62, active high
-*/
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_62_TRI_DEFVAL 
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_62_TRI_SHIFT 
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_62_TRI_MASK 
-#define IOU_SLCR_MIO_MST_TRI1_PIN_62_TRI_DEFVAL                0xFFFFFFFF
-#define IOU_SLCR_MIO_MST_TRI1_PIN_62_TRI_SHIFT                 30
-#define IOU_SLCR_MIO_MST_TRI1_PIN_62_TRI_MASK                  0x40000000U
-
-/*
-* Master Tri-state Enable for pin 63, active high
-*/
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_63_TRI_DEFVAL 
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_63_TRI_SHIFT 
-#undef IOU_SLCR_MIO_MST_TRI1_PIN_63_TRI_MASK 
-#define IOU_SLCR_MIO_MST_TRI1_PIN_63_TRI_DEFVAL                0xFFFFFFFF
-#define IOU_SLCR_MIO_MST_TRI1_PIN_63_TRI_SHIFT                 31
-#define IOU_SLCR_MIO_MST_TRI1_PIN_63_TRI_MASK                  0x80000000U
 
 /*
 * Master Tri-state Enable for pin 64, active high
@@ -30294,8 +29699,6 @@
 #define CRL_APB_RST_LPD_IOU2_OFFSET                                                0XFF5E0238
 #undef CRL_APB_RST_LPD_IOU2_OFFSET 
 #define CRL_APB_RST_LPD_IOU2_OFFSET                                                0XFF5E0238
-#undef CRL_APB_RST_LPD_IOU2_OFFSET 
-#define CRL_APB_RST_LPD_IOU2_OFFSET                                                0XFF5E0238
 #undef UART0_BAUD_RATE_DIVIDER_REG0_OFFSET 
 #define UART0_BAUD_RATE_DIVIDER_REG0_OFFSET                                        0XFF000034
 #undef UART0_BAUD_RATE_GEN_REG0_OFFSET 
@@ -30328,36 +29731,6 @@
 #define CRF_APB_RST_FPD_TOP_GDMA_RESET_DEFVAL                  0x000F9FFE
 #define CRF_APB_RST_FPD_TOP_GDMA_RESET_SHIFT                   6
 #define CRF_APB_RST_FPD_TOP_GDMA_RESET_MASK                    0x00000040U
-
-/*
-* Pixel Processor (submodule of GPU) block level reset
-*/
-#undef CRF_APB_RST_FPD_TOP_GPU_PP0_RESET_DEFVAL 
-#undef CRF_APB_RST_FPD_TOP_GPU_PP0_RESET_SHIFT 
-#undef CRF_APB_RST_FPD_TOP_GPU_PP0_RESET_MASK 
-#define CRF_APB_RST_FPD_TOP_GPU_PP0_RESET_DEFVAL               0x000F9FFE
-#define CRF_APB_RST_FPD_TOP_GPU_PP0_RESET_SHIFT                4
-#define CRF_APB_RST_FPD_TOP_GPU_PP0_RESET_MASK                 0x00000010U
-
-/*
-* Pixel Processor (submodule of GPU) block level reset
-*/
-#undef CRF_APB_RST_FPD_TOP_GPU_PP1_RESET_DEFVAL 
-#undef CRF_APB_RST_FPD_TOP_GPU_PP1_RESET_SHIFT 
-#undef CRF_APB_RST_FPD_TOP_GPU_PP1_RESET_MASK 
-#define CRF_APB_RST_FPD_TOP_GPU_PP1_RESET_DEFVAL               0x000F9FFE
-#define CRF_APB_RST_FPD_TOP_GPU_PP1_RESET_SHIFT                5
-#define CRF_APB_RST_FPD_TOP_GPU_PP1_RESET_MASK                 0x00000020U
-
-/*
-* GPU block level reset
-*/
-#undef CRF_APB_RST_FPD_TOP_GPU_RESET_DEFVAL 
-#undef CRF_APB_RST_FPD_TOP_GPU_RESET_SHIFT 
-#undef CRF_APB_RST_FPD_TOP_GPU_RESET_MASK 
-#define CRF_APB_RST_FPD_TOP_GPU_RESET_DEFVAL                   0x000F9FFE
-#define CRF_APB_RST_FPD_TOP_GPU_RESET_SHIFT                    3
-#define CRF_APB_RST_FPD_TOP_GPU_RESET_MASK                     0x00000008U
 
 /*
 * GT block level reset
@@ -30625,16 +29998,6 @@
 #define IOU_SLCR_SD_CONFIG_REG3_SD1_RETUNETMR_DEFVAL           0x06070607
 #define IOU_SLCR_SD_CONFIG_REG3_SD1_RETUNETMR_SHIFT            22
 #define IOU_SLCR_SD_CONFIG_REG3_SD1_RETUNETMR_MASK             0x03C00000U
-
-/*
-* Block level reset
-*/
-#undef CRL_APB_RST_LPD_IOU2_CAN1_RESET_DEFVAL 
-#undef CRL_APB_RST_LPD_IOU2_CAN1_RESET_SHIFT 
-#undef CRL_APB_RST_LPD_IOU2_CAN1_RESET_MASK 
-#define CRL_APB_RST_LPD_IOU2_CAN1_RESET_DEFVAL                 0x0017FFFF
-#define CRL_APB_RST_LPD_IOU2_CAN1_RESET_SHIFT                  8
-#define CRL_APB_RST_LPD_IOU2_CAN1_RESET_MASK                   0x00000100U
 
 /*
 * Block level reset
@@ -31054,6 +30417,90 @@
 #define IOU_SCNTRS_COUNTER_CONTROL_REGISTER_EN_DEFVAL          0x00000000
 #define IOU_SCNTRS_COUNTER_CONTROL_REGISTER_EN_SHIFT           0
 #define IOU_SCNTRS_COUNTER_CONTROL_REGISTER_EN_MASK            0x00000001U
+#undef PMU_GLOBAL_REQ_PWRDWN_INT_EN_OFFSET 
+#define PMU_GLOBAL_REQ_PWRDWN_INT_EN_OFFSET                                        0XFFD80218
+#undef PMU_GLOBAL_REQ_PWRDWN_TRIG_OFFSET 
+#define PMU_GLOBAL_REQ_PWRDWN_TRIG_OFFSET                                          0XFFD80220
+
+/*
+* Power-down Request Interrupt Enable for GPU PP0
+*/
+#undef PMU_GLOBAL_REQ_PWRDWN_INT_EN_PP0_DEFVAL 
+#undef PMU_GLOBAL_REQ_PWRDWN_INT_EN_PP0_SHIFT 
+#undef PMU_GLOBAL_REQ_PWRDWN_INT_EN_PP0_MASK 
+#define PMU_GLOBAL_REQ_PWRDWN_INT_EN_PP0_DEFVAL                0x00000000
+#define PMU_GLOBAL_REQ_PWRDWN_INT_EN_PP0_SHIFT                 4
+#define PMU_GLOBAL_REQ_PWRDWN_INT_EN_PP0_MASK                  0x00000010U
+
+/*
+* Power-down Request Interrupt Enable for GPU PP1
+*/
+#undef PMU_GLOBAL_REQ_PWRDWN_INT_EN_PP1_DEFVAL 
+#undef PMU_GLOBAL_REQ_PWRDWN_INT_EN_PP1_SHIFT 
+#undef PMU_GLOBAL_REQ_PWRDWN_INT_EN_PP1_MASK 
+#define PMU_GLOBAL_REQ_PWRDWN_INT_EN_PP1_DEFVAL                0x00000000
+#define PMU_GLOBAL_REQ_PWRDWN_INT_EN_PP1_SHIFT                 5
+#define PMU_GLOBAL_REQ_PWRDWN_INT_EN_PP1_MASK                  0x00000020U
+
+/*
+* Power-down Request Interrupt Enable for ACPU2
+*/
+#undef PMU_GLOBAL_REQ_PWRDWN_INT_EN_ACPU2_DEFVAL 
+#undef PMU_GLOBAL_REQ_PWRDWN_INT_EN_ACPU2_SHIFT 
+#undef PMU_GLOBAL_REQ_PWRDWN_INT_EN_ACPU2_MASK 
+#define PMU_GLOBAL_REQ_PWRDWN_INT_EN_ACPU2_DEFVAL              0x00000000
+#define PMU_GLOBAL_REQ_PWRDWN_INT_EN_ACPU2_SHIFT               2
+#define PMU_GLOBAL_REQ_PWRDWN_INT_EN_ACPU2_MASK                0x00000004U
+
+/*
+* Power-down Request Interrupt Enable for ACPU3
+*/
+#undef PMU_GLOBAL_REQ_PWRDWN_INT_EN_ACPU3_DEFVAL 
+#undef PMU_GLOBAL_REQ_PWRDWN_INT_EN_ACPU3_SHIFT 
+#undef PMU_GLOBAL_REQ_PWRDWN_INT_EN_ACPU3_MASK 
+#define PMU_GLOBAL_REQ_PWRDWN_INT_EN_ACPU3_DEFVAL              0x00000000
+#define PMU_GLOBAL_REQ_PWRDWN_INT_EN_ACPU3_SHIFT               3
+#define PMU_GLOBAL_REQ_PWRDWN_INT_EN_ACPU3_MASK                0x00000008U
+
+/*
+* Power-down Request Trigger for GPU PP0
+*/
+#undef PMU_GLOBAL_REQ_PWRDWN_TRIG_PP0_DEFVAL 
+#undef PMU_GLOBAL_REQ_PWRDWN_TRIG_PP0_SHIFT 
+#undef PMU_GLOBAL_REQ_PWRDWN_TRIG_PP0_MASK 
+#define PMU_GLOBAL_REQ_PWRDWN_TRIG_PP0_DEFVAL                  0x00000000
+#define PMU_GLOBAL_REQ_PWRDWN_TRIG_PP0_SHIFT                   4
+#define PMU_GLOBAL_REQ_PWRDWN_TRIG_PP0_MASK                    0x00000010U
+
+/*
+* Power-down Request Trigger for GPU PP1
+*/
+#undef PMU_GLOBAL_REQ_PWRDWN_TRIG_PP1_DEFVAL 
+#undef PMU_GLOBAL_REQ_PWRDWN_TRIG_PP1_SHIFT 
+#undef PMU_GLOBAL_REQ_PWRDWN_TRIG_PP1_MASK 
+#define PMU_GLOBAL_REQ_PWRDWN_TRIG_PP1_DEFVAL                  0x00000000
+#define PMU_GLOBAL_REQ_PWRDWN_TRIG_PP1_SHIFT                   5
+#define PMU_GLOBAL_REQ_PWRDWN_TRIG_PP1_MASK                    0x00000020U
+
+/*
+* Power-down Request Trigger for ACPU2
+*/
+#undef PMU_GLOBAL_REQ_PWRDWN_TRIG_ACPU2_DEFVAL 
+#undef PMU_GLOBAL_REQ_PWRDWN_TRIG_ACPU2_SHIFT 
+#undef PMU_GLOBAL_REQ_PWRDWN_TRIG_ACPU2_MASK 
+#define PMU_GLOBAL_REQ_PWRDWN_TRIG_ACPU2_DEFVAL                0x00000000
+#define PMU_GLOBAL_REQ_PWRDWN_TRIG_ACPU2_SHIFT                 2
+#define PMU_GLOBAL_REQ_PWRDWN_TRIG_ACPU2_MASK                  0x00000004U
+
+/*
+* Power-down Request Trigger for ACPU3
+*/
+#undef PMU_GLOBAL_REQ_PWRDWN_TRIG_ACPU3_DEFVAL 
+#undef PMU_GLOBAL_REQ_PWRDWN_TRIG_ACPU3_SHIFT 
+#undef PMU_GLOBAL_REQ_PWRDWN_TRIG_ACPU3_MASK 
+#define PMU_GLOBAL_REQ_PWRDWN_TRIG_ACPU3_DEFVAL                0x00000000
+#define PMU_GLOBAL_REQ_PWRDWN_TRIG_ACPU3_SHIFT                 3
+#define PMU_GLOBAL_REQ_PWRDWN_TRIG_ACPU3_MASK                  0x00000008U
 #undef FPD_SLCR_SECURE_SLCR_DPDMA_OFFSET 
 #define FPD_SLCR_SECURE_SLCR_DPDMA_OFFSET                                          0XFD690040
 #undef FPD_SLCR_SECURE_SLCR_PCIE_OFFSET 
@@ -32374,6 +31821,10 @@
 #define CRL_APB_RST_LPD_TOP_OFFSET                                                 0XFF5E023C
 #undef FPD_SLCR_AFI_FS_OFFSET 
 #define FPD_SLCR_AFI_FS_OFFSET                                                     0XFD615000
+#undef AFIFM2_AFIFM_RDCTRL_OFFSET 
+#define AFIFM2_AFIFM_RDCTRL_OFFSET                                                 0XFD380000
+#undef AFIFM2_AFIFM_WRCTRL_OFFSET 
+#define AFIFM2_AFIFM_WRCTRL_OFFSET                                                 0XFD380014
 
 /*
 * AF_FM0 block level reset
@@ -32456,6 +31907,40 @@
 #define FPD_SLCR_AFI_FS_DW_SS0_SEL_DEFVAL                      0x00000A00
 #define FPD_SLCR_AFI_FS_DW_SS0_SEL_SHIFT                       8
 #define FPD_SLCR_AFI_FS_DW_SS0_SEL_MASK                        0x00000300U
+
+/*
+* Select the 32/64/128-bit data width selection for the Slave 1 00: 32-bit
+    *  AXI data width (default) 01: 64-bit AXI data width 10: 128-bit AXI data
+    *  width 11: reserved
+*/
+#undef FPD_SLCR_AFI_FS_DW_SS1_SEL_DEFVAL 
+#undef FPD_SLCR_AFI_FS_DW_SS1_SEL_SHIFT 
+#undef FPD_SLCR_AFI_FS_DW_SS1_SEL_MASK 
+#define FPD_SLCR_AFI_FS_DW_SS1_SEL_DEFVAL                      0x00000A00
+#define FPD_SLCR_AFI_FS_DW_SS1_SEL_SHIFT                       10
+#define FPD_SLCR_AFI_FS_DW_SS1_SEL_MASK                        0x00000C00U
+
+/*
+* Configures the Read Channel Fabric interface width. 2'b11 : Reserved 2'b
+    * 10 : 32-bit Fabric 2'b01 : 64-bit enabled 2'b00 : 128-bit enabled
+*/
+#undef AFIFM2_AFIFM_RDCTRL_FABRIC_WIDTH_DEFVAL 
+#undef AFIFM2_AFIFM_RDCTRL_FABRIC_WIDTH_SHIFT 
+#undef AFIFM2_AFIFM_RDCTRL_FABRIC_WIDTH_MASK 
+#define AFIFM2_AFIFM_RDCTRL_FABRIC_WIDTH_DEFVAL                0x000003B0
+#define AFIFM2_AFIFM_RDCTRL_FABRIC_WIDTH_SHIFT                 0
+#define AFIFM2_AFIFM_RDCTRL_FABRIC_WIDTH_MASK                  0x00000003U
+
+/*
+* Configures the Write Channel Fabric interface width. 2'b11 : Reserved 2'
+    * b10 : 32-bit Fabric 2'b01 : 64-bit enabled 2'b00 : 128-bit enabled
+*/
+#undef AFIFM2_AFIFM_WRCTRL_FABRIC_WIDTH_DEFVAL 
+#undef AFIFM2_AFIFM_WRCTRL_FABRIC_WIDTH_SHIFT 
+#undef AFIFM2_AFIFM_WRCTRL_FABRIC_WIDTH_MASK 
+#define AFIFM2_AFIFM_WRCTRL_FABRIC_WIDTH_DEFVAL                0x000003B0
+#define AFIFM2_AFIFM_WRCTRL_FABRIC_WIDTH_SHIFT                 0
+#define AFIFM2_AFIFM_WRCTRL_FABRIC_WIDTH_MASK                  0x00000003U
 #undef GPIO_MASK_DATA_5_MSW_OFFSET 
 #define GPIO_MASK_DATA_5_MSW_OFFSET                                                0XFF0A002C
 #undef GPIO_DIRM_5_OFFSET 
