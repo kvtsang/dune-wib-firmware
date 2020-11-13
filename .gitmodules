@@ -1,3 +1,6 @@
 [submodule "wib_sim"]
 	path = wib_sim
 	url = git@github.com:madorskya/wib_sim.git
+[submodule "linux-2020.1/project-spec/meta-user/recipes-apps/rogue/rogue"]
+	path = linux-2020.1/project-spec/meta-user/recipes-apps/rogue/rogue
+	url = https://github.com/slaclab/rogue.git
