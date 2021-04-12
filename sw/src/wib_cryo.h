@@ -19,15 +19,19 @@ public:
     
     // Configure the frontend for this WIB
     virtual bool configure_wib(const wib::ConfigureWIB &conf);
+
+    static const size_t N_FEMBS = 4;
     
 protected:
 
     // Interface to each of the 4 FEMBs 
-    FEMB_CRYO* femb[4];
+    //FEMB_CRYO* femb[N_FEMBS];
     
     // Reset front end to a powered off state
     virtual bool reset_frontend();
-    
+
+    inline bool _femb_power_on(size_t femb_idx);
+    inline bool _femb_power_off(size_t femb_idx);
 };
 
 #endif
