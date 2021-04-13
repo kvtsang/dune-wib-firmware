@@ -25,7 +25,6 @@ bool WIB_CRYO::reset_frontend() {
     glog.log("Disabling front end power\n");
     for (size_t i = 0; i < N_FEMBS; ++i)
       _femb_power_off(i);
-      //femb_power_en_ctrl(i, 0x00);
 
     femb_power_config();
     
@@ -75,8 +74,7 @@ bool WIB_CRYO::_femb_power_off(size_t femb_idx) {
 
   glog.log("Power off FEMB %i\n", femb_idx);
 
-  // TODO(2021-03-21 kvtsang) Write I2C
-  //femb_power_en_ctrl(femb_idx, 0x00);
+  femb_power_en_ctrl(femb_idx, 0x00);
 
   frontend_power[femb_idx] = false;
   return true;
@@ -116,12 +114,10 @@ bool WIB_CRYO::_femb_power_on(size_t femb_idx) {
   glog.log("Enabling DC2DC and LDO\n");
   glog.log("[DEBUG] femb_power_en_ctrl(%i, %i)\n", femb_idx, i2c_data);
 
-  // TODO(2021-03-21 kvtsang) Write I2C
-  //femb_power_en_ctrl(femb_idx, i2c_data)
+  femb_power_en_ctrl(femb_idx, i2c_data);
   
   glog.log("Enabling PWR_BIAS_EN_BRD%i\n", femb_idx);
-  // TODO(2021-03-21 kvtsang) Write I2C
-  //femb_power_en_ctrl(femb_idx, 0xFF)
+  femb_power_en_ctrl(femb_idx, 0xFF);
 
   frontend_power[femb_idx] = true;
 
