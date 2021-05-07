@@ -793,7 +793,14 @@ uint32_t WIB::read_fw_timestamp() {
     return io_reg_read(&this->regs,REG_FW_TIMESTAMP);
 }
 
-bool WIB::calibrate() {
-    glog.log("Calibrate not implemented\n");
+bool WIB::calibrate() { glog.log("Calibrate not implemented\n");
     return false;
 }
+
+bool WIB::femb_rx_mask(uint32_t value, uint32_t mask) {
+    uint32_t prev = io_reg_read(&this->regs,REG_LINK_MASK);
+    value = (prev & (~mask)) | (value & mask);
+    io_reg_write(&this->regs,REG_LINK_MASK,value);
+    return true;
+}
+

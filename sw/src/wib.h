@@ -35,6 +35,7 @@ constexpr size_t DAQ_SPY_SIZE           = 0x00100000;
 //32bit register index in CTRL_REGS
 constexpr size_t REG_TIMING             = 0x0000/4;
 constexpr size_t REG_FW_CTRL            = 0x0004/4;
+constexpr size_t REG_LINK_MASK          = 0x0008/4;
 constexpr size_t REG_FAKE_TIME_CTRL     = 0x000C/4;
 constexpr size_t REG_TIMING_CMD_0       = 0x0010/4;
 constexpr size_t REG_TIMING_CMD_1       = 0x0014/4;
@@ -129,7 +130,10 @@ public:
     
     // Read the firmware version timestamp code
     uint32_t read_fw_timestamp();
-    
+
+    // Set the serial receiver mask value
+    bool femb_rx_mask(uint32_t value, uint32_t mask = 0xFFFF);
+
 protected:
     
     // Timing endpoint PLL initialized

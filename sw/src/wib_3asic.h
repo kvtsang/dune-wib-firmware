@@ -4,9 +4,6 @@
 #include "wib.h"
 #include "femb_3asic.h"
 
-//32bit register index in CTRL_REGS
-constexpr size_t REG_LINK_MASK       = 0x0008/4;
-
 class WIB_3ASIC : public WIB {
 
 public:
@@ -47,9 +44,6 @@ protected:
     // Set FEMB power on or off per FEMB
     // May subclass and override this as ASICs/FEMBs undergo revisions
     virtual bool femb_power_set(int femb_idx, bool on, bool cold = true);
-    
-    // Set the coldata serial receiver mask value
-    bool femb_rx_mask(uint32_t value, uint32_t mask = 0xFFFF);
     
     // Resets the coldata serial receivers
     bool femb_rx_reset();

@@ -116,13 +116,6 @@ bool WIB_3ASIC::femb_power_set(int femb_idx, bool on, bool cold) {
     return power_res;
 }
 
-bool WIB_3ASIC::femb_rx_mask(uint32_t value, uint32_t mask) {
-    uint32_t prev = io_reg_read(&this->regs,REG_LINK_MASK);
-    value = (prev & (~mask)) | (value & mask);
-    io_reg_write(&this->regs,REG_LINK_MASK,value);
-    return true;
-}
-
 bool WIB_3ASIC::femb_rx_reset() {
     //rx_reset is bit 13
     uint32_t value = io_reg_read(&this->regs,REG_FW_CTRL);
