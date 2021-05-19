@@ -28,6 +28,8 @@ bool WIB_CRYO::reset_frontend() {
 
     femb_power_config();
     
+    glog.log("Disable link_master\n");
+    femb_rx_mask(0xffff); // disable all 4 FEMBs
     return success;
 }
 
@@ -51,9 +53,14 @@ bool WIB_CRYO::configure_wib(const wib::ConfigureWIB &conf) {
     }
     
     bool fembs_powered = true;
+    uint32_t rx_mask = 0x0; // enable all link_master by default
     for (int i = 0; i < N_FEMBS; i++) { // Check FEMB power state (enabled FEMBs must be ON)
         if (conf.fembs(i).enabled()) {
             fembs_powered &= frontend_power[i];
+        }
+        else {
+          // disable link_master for inactive FEMB
+          rx_mask |= (0xf << (i*4));
         }
     }
     if (!fembs_powered) {
@@ -61,6 +68,9 @@ bool WIB_CRYO::configure_wib(const wib::ConfigureWIB &conf) {
         return false;
     }
     
+    glog.log("Set rx_mask: %X\n", rx_mask);
+    femb_rx_mask(rx_mask);
+
     glog.log("Reconfiguring WIB\n"); 
     
     // FIXME do CRYO config
