@@ -46,6 +46,7 @@ bool WIB_CRYO::power_wib(const wib::PowerWIB &conf) {
 }
 
 bool WIB_CRYO::configure_wib(const wib::ConfigureWIB &conf) {
+    glog.log("Configuring WIB-CRYO ...\n"); 
 
     if (conf.fembs_size() != N_FEMBS) {
         glog.log("Must supply exactly %i configurations\n", N_FEMBS);
@@ -71,7 +72,6 @@ bool WIB_CRYO::configure_wib(const wib::ConfigureWIB &conf) {
     glog.log("Set rx_mask: %X\n", rx_mask);
     femb_rx_mask(rx_mask);
 
-    glog.log("Reconfiguring WIB\n"); 
     
     // FIXME do CRYO config
     
