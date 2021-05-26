@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+
+set -o pipefail
+
+usage() {
+  echo "Usage: $PROGRAM [cryo]"
+}
+
+config_cryo() {
+  echo "Configure for wib-cryo"
+
+  OLDPWD=$PWD
+  cd "$SRC_DIR"
+  ln -sf Makefile_cryo Makefile
+
+  GIT_VERSION=$(git describe --long --dirty --always --tags 2>/dev/null || echo unknown)
+  
+cat >src/version.cc <<-_EOF 
+#include "version.h" 
+char const *const GIT_VERSION = "$GIT_VERSION";
+_EOF
+
+  cd "$OLDPWD"
+}
+
+config_3asic() {
+  echo "Configure for wib-3asic"
+
+  OLDPWD=$PWD
+  cd "$SRC_DIR"
+  ln -sf Makefile_cryo Makefile
+  cd "$OLDPWD"
+}
+
+PROGRAM="${0##*/}"
+SRC_DIR=$(dirname $0)
+
+while getopts "h" opt; do
+  case $opt in
+    h|\?) usage; exit 0;;
+  esac
+done
+
+
+[[ "$1" == "cryo" ]] && config_cryo || config_3asic
