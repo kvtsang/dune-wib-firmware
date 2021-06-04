@@ -92,11 +92,11 @@ bool WIB::initialize() {
     return success;
 }
 
-bool WIB::reset_timing_endpoint() {
+bool WIB::reset_timing_endpoint(const std::string &pll_config) {
     bool success = true;
     if (!pll_initialized) {
-        glog.log("Configuring PLL\n");
-        success &= script("conf_pll_timing");
+        glog.log("Configuring PLL %s\n", pll_config);
+        success &= script(pll_config);
         if (success) {
             pll_initialized = true;
         } else {

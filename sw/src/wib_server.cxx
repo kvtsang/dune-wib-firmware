@@ -16,11 +16,11 @@ int main(int argc, char **argv) {
     setvbuf(stderr, NULL, _IOLBF, 0);
     
     WIB *w;
+    std::string wib_type(argv[1]);
     if (argc <= 1) {
         glog.log("wib_server using 3ASIC WIB interface\n");
         w = new WIB_3ASIC();
     } else {
-        std::string wib_type(argv[1]);
         if (wib_type == "3ASIC") {
             glog.log("wib_server using 3ASIC WIB interface\n");
             w = new WIB_3ASIC();
@@ -247,7 +247,7 @@ int main(int argc, char **argv) {
         } else if (command.cmd().Is<wib::ResetTiming>()) {
             glog.log("reset_timing\n");
             wib::GetTimingStatus::TimingStatus rep;    
-            w->reset_timing_endpoint(); 
+	    wib_type == "CRYO" ?  w->reset_timing_endpoint("conf_pll_timing_cryo") : w->reset_timing_endpoint(); 
             w->read_timing_status(rep);
             rep.SerializeToString(&reply_str);
         } else if (command.cmd().Is<wib::GetTimingStatus>()) {

@@ -77,7 +77,7 @@ public:
     uint8_t backplane_slot_num();
     
     // Reset the timing endpoint
-    bool reset_timing_endpoint();
+    bool reset_timing_endpoint(const std::string &pll_config="config_pll_timing");
     // Returns true if timing endpoint is locked
     bool is_endpoint_locked();    
     
