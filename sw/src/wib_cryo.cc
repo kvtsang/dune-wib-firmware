@@ -42,6 +42,31 @@ bool WIB_CRYO::power_wib(const wib::PowerWIB &conf) {
     for (size_t i = 0; i < N_FEMBS; ++i) {
       status &= conf_femb_on[i] ? _femb_power_on(i) : _femb_power_off(i);
     }
+
+
+    if (!status) {
+      glog.log("Failed to power on enabled FEMBs, aborting\n");
+      return false;
+    }
+    
+    switch(conf.stage()) {
+      case 0:
+        glog.log("Stage 0: Do nothing");
+        break;
+      case 1:
+        glog.log("Stage 1: Waiting for external reset and synchronization\n");
+        // pdtbutler mst PROD_MASTER send-cmd 0 11
+        io_reg_write(&this->regs, REG_TIMING_CMD_0, 0x0b00, 0xFF00); // timing command 0xb == 11 will run EDGE+ACT
+        return status;
+        break;
+      case 2:
+        glog.log("Stage 2: Resuming power ON after external reset and synchronization\n");
+        io_reg_write(&this->regs, REG_TIMING_CMD_0, 0x00000, 0xFF00); // zero out timing commands
+        break;
+      default:
+        glog.log("Unknown stage, aborting\n");
+        return false;
+    }
     return status;
 }
 
