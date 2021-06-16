@@ -1,3 +1,2 @@
 # Configures timing system and PLL before the frontend is activated
-run si5344_62p5mhz_cryo_config
 delay 2000000
