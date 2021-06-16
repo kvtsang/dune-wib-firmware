@@ -247,7 +247,7 @@ int main(int argc, char **argv) {
         } else if (command.cmd().Is<wib::ResetTiming>()) {
             glog.log("reset_timing\n");
             wib::GetTimingStatus::TimingStatus rep;    
-	    wib_type == "CRYO" ?  w->reset_timing_endpoint("conf_pll_timing_cryo") : w->reset_timing_endpoint(); 
+            wib_type == "CRYO" ?  w->reset_timing_endpoint("conf_pll_timing_cryo") : w->reset_timing_endpoint(); 
             w->read_timing_status(rep);
             rep.SerializeToString(&reply_str);
         } else if (command.cmd().Is<wib::GetTimingStatus>()) {
