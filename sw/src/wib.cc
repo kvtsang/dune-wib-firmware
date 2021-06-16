@@ -108,14 +108,16 @@ bool WIB::reset_timing_endpoint(const std::string &pll_config) {
     }
     if (backplane_slot_num() == 0xF) {
         glog.log("Slot number is 0xF; assuming there is no backplane.\n");
-        glog.log("Using timing signal from SFP");
+        glog.log("Using timing signal from SFP\n");
         io_reg_write(&this->regs,REG_FW_CTRL,(1<<5),(1<<5));
     } else {
-        glog.log("Using timing signal from backplane");
+        glog.log("Using timing signal from backplane\n");
         io_reg_write(&this->regs,REG_FW_CTRL,(0<<5),(1<<5));
     }
+    usleep(3000000);
     glog.log("Resetting timing endpoint\n");
     success &= script("pll_sticky_clear");
+    usleep(1000000);
     uint32_t value = timing_addr(); //low 8 bits are addr 
     io_reg_write(&this->regs,REG_TIMING,(1<<28)|value); // bit 28 is reset bit
     usleep(2000000);
