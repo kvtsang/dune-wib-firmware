@@ -361,6 +361,7 @@ int main(int argc, char **argv) {
             wib::ShellCmd req;    
             command.cmd().UnpackTo(&req);
             wib::Status status;
+            glog.mark();
             bool success = w->shell_cmd(req.cmd(), req.args());
             glog.store_mark(status.mutable_extra());
             status.set_success(success);
