@@ -36,10 +36,10 @@ python:
 	protoc -I=src/ --python_out=. src/wib.proto
 
 install:
-	install -d "$(DESTDIR)/bin/"
-	install -m 0755 wib_server "$(DESTDIR)/bin/"
-	install -m 0755 wib_client "$(DESTDIR)/bin/"
-	install -m 0755 extras/wib_update.sh "$(DESTDIR)/bin/"
+	install -d "$(DESTDIR)/usr/bin/"
+	install -m 0755 wib_server "$(DESTDIR)/usr/bin/"
+	install -m 0755 wib_client "$(DESTDIR)/usr/bin/"
+	install -m 0755 extras/wib_update.sh "$(DESTDIR)/usr/bin/"
 	install -d "$(DESTDIR)/etc/rc5.d/"
 	install -m 0755 extras/wib_cryo_init.sh "$(DESTDIR)/etc/rc5.d/S99wib_init.sh"
 	install -d "$(DESTDIR)/etc/wib/"
