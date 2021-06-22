@@ -95,7 +95,7 @@ bool WIB::initialize() {
 bool WIB::reset_timing_endpoint(const std::string &pll_config) {
     bool success = true;
     if (!pll_initialized) {
-        glog.log("Configuring PLL %s\n", pll_config);
+        glog.log("Configuring PLL %s\n", pll_config.c_str());
         success &= script(pll_config);
         if (success) {
             pll_initialized = true;
