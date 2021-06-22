@@ -814,3 +814,38 @@ bool WIB::femb_rx_mask(uint32_t value, uint32_t mask) {
     return true;
 }
 
+bool WIB::shell_cmd(const std::string &cmd, const std::string &args) {
+    if (allowed_shell_cmds.count(cmd) == 0) {
+      glog.log("\"%s\" command not allowed\n",  cmd.c_str());
+      return false;
+    }
+
+    std::string full_cmd = cmd + " " + args + " 2>&1";
+    auto command = full_cmd.c_str();
+
+    FILE *fp;
+    char *line = nullptr;
+    size_t len = 0;
+    ssize_t read;
+
+    fp = popen(command, "r");
+    if (fp == nullptr) {
+      glog.log("Fail to execute \"%s\"\n", command);
+      return false;
+    }
+
+    while ((read = getline(&line, &len, fp)) != -1)
+      glog.log(line);
+
+    if (ferror(fp)) {
+      glog.log("Error running \"%s\"\n", command);
+    }
+
+    free(line);
+    int status = fclose(fp);
+    if (status != 0) {
+      glog.log("Error running \"%s\"\n", command);
+      return false;
+    }
+    return true;
+}

@@ -253,6 +253,21 @@ def help(args):
             print('Unknown command %s'%args.command)
 bind_parser(help_parser,help)
 
+sh_cmd_parser = sub.add_parser('shell_cmd', help='Execute remote shell command', add_help=False)
+sh_cmd_parser.add_argument('cmd', help='Shell command')
+sh_cmd_parser.add_argument('args', help='Shell command arguments', default="", nargs='?')
+def sh_cmd(p_args):
+    req = wibpb.ShellCmd()
+    req.cmd = p_args.cmd
+    req.args = p_args.args
+    rep = wibpb.Status()
+    wib.send_command(req, rep)
+
+    print(rep.extra.decode('ascii'),end='')
+    print('Successful:',rep.success)
+
+bind_parser(sh_cmd_parser, sh_cmd)
+
 def handle_args(args):
     try:
         args = commands.parse_args(args)

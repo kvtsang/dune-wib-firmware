@@ -2,6 +2,9 @@
 #include <string>
 
 WIB_CRYO::WIB_CRYO() : WIB() {
+  // expose wib_cyro.py to wib_server
+  allowed_shell_cmds.insert("wib_cryo.py");
+
     //for (int i = 0; i < 4; i++) {
     //    this->femb[i] = new FEMB_CRYO(i);
     //}

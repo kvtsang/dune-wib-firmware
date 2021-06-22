@@ -369,3 +369,11 @@ message CDRegValue {
     uint32 reg_addr = 5;
     uint32 data = 6;
 }
+
+// Shell Command
+message ShellCmd{
+  string cmd = 1;
+  string args = 2;
+
+  //replies Status
+}

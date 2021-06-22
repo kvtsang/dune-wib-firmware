@@ -356,10 +356,18 @@ int main(int argc, char **argv) {
             wib::Empty empty;
             empty.SerializeToString(&reply_str);
             w->update(update.root_archive().c_str(),update.boot_archive().c_str());
+        } else if (command.cmd().Is<wib::ShellCmd>()) {
+            glog.log("execute shell command remotely\n");
+            wib::ShellCmd req;    
+            command.cmd().UnpackTo(&req);
+            wib::Status status;
+            bool success = w->shell_cmd(req.cmd(), req.args());
+            glog.store_mark(status.mutable_extra());
+            status.set_success(success);
+            status.SerializeToString(&reply_str);
         } else {
 	        glog.log("Received an unknown message!\n");
-	    }
-        
+	      }
         glog.log("sending message %i size %lu bytes\n",i+1,reply_str.size());
         zmq::message_t reply(reply_str.size());
         memcpy((void*)reply.data(), reply_str.c_str(), reply_str.size());

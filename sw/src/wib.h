@@ -10,6 +10,7 @@
 #include <cstdint>
 #include <string>
 #include <vector>
+#include <set>
 
 //Selectable I2C busses for /dev/i2c-0
 constexpr uint8_t I2C_SI5344            = 0;
@@ -134,6 +135,11 @@ public:
     // Set the serial receiver mask value
     bool femb_rx_mask(uint32_t value, uint32_t mask = 0xFFFF);
 
+    // Execute a shell command remotely on wib
+    // CAUTION: Running arbritary shell commands (e.g. "rm -rf *") is dangerous
+    // define allowed commands in "allowed_shell_cmds"
+    bool shell_cmd(const std::string &cmd, const std::string &args="");
+
 protected:
     
     // Timing endpoint PLL initialized
@@ -184,7 +190,8 @@ protected:
     // Reset front end to a powered off state (ready to be turned on)
     // At a minimum this should disable regulators femb_power_en_ctrl and configure them femb_power_config
     virtual bool reset_frontend() = 0;
-    
-};
 
+    // Allowed shell commands by "WIB::shell_cmd()", default none
+    std::set<std::string> allowed_shell_cmds;
+};
 #endif
