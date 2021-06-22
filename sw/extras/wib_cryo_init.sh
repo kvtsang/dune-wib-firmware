@@ -1,7 +1,10 @@
 #!/bin/sh
 
-echo "Starting wib_server"
-/bin/wib_server CRYO 2>/var/log/wib_server.err >/var/log/wib_server.log &
+# https://github.com/kvtsang/wib-cryo
+SERVICE=/usr/bin/cryo_service
+[ ! -f $SERVICE ] && echo "$SERVICE not installed" && exit 1
+
+$SERVICE wib start
 
 #Evidentally this crashes the whole system somehow...
 #echo "Starting xvcserver"
@@ -19,6 +22,4 @@ echo "wib_top.bit" > /sys/class/fpga_manager/fpga0/firmware
 echo "Starting xvcserver"
 /home/root/xvcserver </dev/null 2>/var/log/xvcserver.err >/var/log/xvcserver.log &
 
-echo "Starting rogue server"
-python3 /home/root/sw_cryo/python/script/cryo_wib_server.py --type=wib-hw \
-        </dev/null 2>/var/log/cryo_wib_server.err >/var/log/cryo_wib_server.log &
+$SERVICE rogue start
