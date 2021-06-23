@@ -83,7 +83,7 @@ bool WIB_CRYO::configure_wib(const wib::ConfigureWIB &conf) {
     
     bool fembs_powered = true;
     uint32_t rx_mask = 0x0; // enable all link_master by default
-    for (int i = 0; i < N_FEMBS; i++) { // Check FEMB power state (enabled FEMBs must be ON)
+    for (int i = 0; i < N_FEMBS; ++i) { // Check FEMB power state (enabled FEMBs must be ON)
         if (conf.fembs(i).enabled()) {
             fembs_powered &= frontend_power[i];
         }
@@ -100,9 +100,24 @@ bool WIB_CRYO::configure_wib(const wib::ConfigureWIB &conf) {
     glog.log("Set rx_mask: %X\n", rx_mask);
     femb_rx_mask(rx_mask);
 
-    
-    // FIXME do CRYO config
-    
+    for (int i = 0; i < N_FEMBS; ++i) {
+      auto const &femb_conf = conf.fembs(i);
+      if (!femb_conf.enabled()) continue;
+
+      // default bltrim
+      int setting = 0x380;
+      int tp = femb_conf.peak_time() & 0x3;
+      int gain = femb_conf.gain() & 0x3;
+      int baseline = femb_conf.baseline() & 0x1;
+
+      setting += tp << 2;
+      setting += gain << 4;
+      setting += baseline << 6;
+
+      std::ostringstream buf;
+      buf << "config --femb " << i << " --val " << setting;
+      cryo_cmd(buf.str());
+    }
     return true;
 }
 
@@ -160,4 +175,8 @@ bool WIB_CRYO::_femb_power_on(size_t femb_idx) {
   frontend_power[femb_idx] = true;
 
   return true;
+}
+
+bool WIB_CRYO::cryo_cmd(const std::string &args) {
+  return shell_cmd("wib_cryo.py", args);
 }

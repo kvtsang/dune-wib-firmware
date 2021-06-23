@@ -21,6 +21,8 @@ public:
     virtual bool configure_wib(const wib::ConfigureWIB &conf);
 
     static const size_t N_FEMBS = 4;
+
+    bool cryo_cmd(const std::string &args);
     
 protected:
 
