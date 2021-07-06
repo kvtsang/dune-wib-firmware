@@ -366,6 +366,17 @@ int main(int argc, char **argv) {
             glog.store_mark(status.mutable_extra());
             status.set_success(success);
             status.SerializeToString(&reply_str);
+        } else if (command.cmd().Is<wib::SetRxMask>()) {
+            wib::SetRxMask req;
+            command.cmd().UnpackTo(&req);
+
+            glog.log("set rx_mask = %#x\n", req.value());
+            wib::Status status;
+            glog.mark();
+            bool success = w->femb_rx_mask(req.value());
+            glog.store_mark(status.mutable_extra());
+            status.set_success(success);
+            status.SerializeToString(&reply_str);
         } else {
 	        glog.log("Received an unknown message!\n");
 	      }

@@ -377,3 +377,9 @@ message ShellCmd{
 
   //replies Status
 }
+
+// set rx mask
+message SetRxMask{
+  uint32 value = 1;
+  //replies Status
+}
